@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8494a5"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f5a"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="520" fill="#ffffff"/>
+
+  <text x="32" y="34" font-size="19" font-weight="700" fill="#16202c">Gap 1 — Retrieval is not the same thing as vector search</text>
+  <text x="32" y="56" font-size="13" fill="#6b7a8c">Query: “Welke korting hoort bij productcode BAS-VR-400?”</text>
+
+  <!-- Panel A: naive -->
+  <rect x="24" y="76" width="952" height="150" rx="8" fill="#f5f7f9" stroke="#dde4ea"/>
+  <text x="44" y="102" font-size="12" font-weight="700" fill="#8494a5" letter-spacing="0.6">WHAT THE DIAGRAM SHOWS</text>
+
+  <rect x="44" y="126" width="120" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="104" y="157" font-size="13" fill="#16202c" text-anchor="middle">Question</text>
+
+  <line x1="170" y1="152" x2="204" y2="152" stroke="#8494a5" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="210" y="126" width="130" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="275" y="157" font-size="13" fill="#16202c" text-anchor="middle">Embed</text>
+
+  <line x1="346" y1="152" x2="380" y2="152" stroke="#8494a5" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="386" y="126" width="160" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="466" y="157" font-size="13" fill="#16202c" text-anchor="middle">Vector search</text>
+
+  <line x1="552" y1="152" x2="586" y2="152" stroke="#8494a5" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="592" y="126" width="180" height="52" rx="6" fill="#fdf1ef" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="682" y="149" font-size="13" font-weight="600" fill="#c0392b" text-anchor="middle">BAS-VR-100</text>
+  <text x="682" y="167" font-size="11" fill="#c0392b" text-anchor="middle">wrong row, confident answer</text>
+
+  <text x="790" y="146" font-size="11.5" fill="#6b7a8c">One digit apart.</text>
+  <text x="790" y="163" font-size="11.5" fill="#6b7a8c">Neighbours in embedding</text>
+  <text x="790" y="180" font-size="11.5" fill="#6b7a8c">space. Nothing checks.</text>
+
+  <!-- Panel B: corrected -->
+  <rect x="24" y="244" width="952" height="180" rx="8" fill="#eef6fb" stroke="#c7e0f0"/>
+  <text x="44" y="270" font-size="12" font-weight="700" fill="#0b6cb8" letter-spacing="0.6">WHAT RETRIEVAL ACTUALLY NEEDS</text>
+
+  <rect x="44" y="322" width="110" height="52" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="99" y="353" font-size="13" fill="#16202c" text-anchor="middle">Question</text>
+
+  <path d="M 160 341 L 178 341 L 178 310 L 196 310" fill="none" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M 160 355 L 178 355 L 178 386 L 196 386" fill="none" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="202" y="286" width="184" height="48" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="294" y="308" font-size="12.5" fill="#16202c" text-anchor="middle">BM25 keyword</text>
+  <text x="294" y="324" font-size="10.5" fill="#6b7a8c" text-anchor="middle">analyzer: nl.microsoft</text>
+
+  <rect x="202" y="362" width="184" height="48" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="294" y="384" font-size="12.5" fill="#16202c" text-anchor="middle">Vector search</text>
+  <text x="294" y="400" font-size="10.5" fill="#6b7a8c" text-anchor="middle">HNSW + vectorizer</text>
+
+  <path d="M 392 310 L 410 310 L 410 348 L 428 348" fill="none" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M 392 386 L 410 386 L 410 348 L 428 348" fill="none" stroke="#0b6cb8" stroke-width="1.6"/>
+
+  <rect x="434" y="322" width="120" height="52" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="494" y="346" font-size="12.5" fill="#16202c" text-anchor="middle">RRF fusion</text>
+  <text x="494" y="362" font-size="10.5" fill="#6b7a8c" text-anchor="middle">one ranked list</text>
+
+  <line x1="560" y1="348" x2="590" y2="348" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="596" y="322" width="170" height="52" rx="6" fill="#ffffff" stroke="#0b6cb8" stroke-width="1.8"/>
+  <text x="681" y="346" font-size="12.5" font-weight="600" fill="#16202c" text-anchor="middle">Semantic reranker</text>
+  <text x="681" y="362" font-size="10.5" fill="#6b7a8c" text-anchor="middle">L2 cross-encoder</text>
+
+  <line x1="772" y1="348" x2="800" y2="348" stroke="#1a7f5a" stroke-width="1.6" marker-end="url(#arrowGreen)"/>
+
+  <rect x="806" y="322" width="150" height="52" rx="6" fill="#eef7f2" stroke="#1a7f5a" stroke-width="1.5"/>
+  <text x="881" y="346" font-size="13" font-weight="600" fill="#1a7f5a" text-anchor="middle">BAS-VR-400</text>
+  <text x="881" y="363" font-size="10.5" fill="#1a7f5a" text-anchor="middle">correct row</text>
+
+  <!-- Footnote: compound queries -->
+  <rect x="24" y="440" width="952" height="58" rx="8" fill="#ffffff" stroke="#dde4ea" stroke-dasharray="4 3"/>
+  <text x="44" y="464" font-size="12" font-weight="700" fill="#8494a5" letter-spacing="0.6">AND ONE QUESTION PER TURN IS AN ASSUMPTION</text>
+  <text x="44" y="484" font-size="12" fill="#16202c">Compound query → agentic retrieval decomposes into parallel subqueries → each reranked → merged.  Extractive GA in 2026-04-01; query planning and answer synthesis still preview.</text>
+</svg>

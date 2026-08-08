@@ -1,8 +1,11 @@
-# Stable track: gaps 1 (hybrid + rerank), 2, 3, 4 all run on this.
-azure-search-documents>=11.6.0
+# azure-search-documents 12.0.0 is the first GA release that ships the
+# knowledgebases module, so all four gaps - including agentic retrieval -
+# run on the stable package. No --pre needed.
+azure-search-documents>=12.0.0
 azure-identity>=1.19.0
 openai>=1.60.0
+python-dotenv>=1.0.0
 
-# Gap 1's agentic_retrieve.py needs the preview package for query planning,
-# answer synthesis, and configurable reasoning effort:
+# Preview-only agentic features (query planning, answer synthesis,
+# configurable reasoning effort) still require the beta:
 #   pip install --pre azure-search-documents

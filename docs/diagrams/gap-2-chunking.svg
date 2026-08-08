@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8494a5"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="520" fill="#ffffff"/>
+
+  <text x="32" y="34" font-size="19" font-weight="700" fill="#16202c">Gap 2 — Chunking is most of the work</text>
+  <text x="32" y="56" font-size="13" fill="#6b7a8c">Same source document. Two splitters. Only one of them survives a table.</text>
+
+  <!-- Source document -->
+  <rect x="24" y="80" width="230" height="330" rx="8" fill="#f5f7f9" stroke="#dde4ea"/>
+  <text x="44" y="106" font-size="12" font-weight="700" fill="#8494a5" letter-spacing="0.6">SOURCE</text>
+  <text x="44" y="130" font-size="12.5" font-weight="600" fill="#16202c">Basisverzekering 2026</text>
+  <text x="44" y="152" font-size="11.5" fill="#6b7a8c">## 1. Eigen risico</text>
+  <text x="44" y="170" font-size="11" fill="#6b7a8c">Het verplicht eigen risico…</text>
+
+  <rect x="44" y="184" width="190" height="96" rx="4" fill="#ffffff" stroke="#c8d2dc"/>
+  <line x1="44" y1="206" x2="234" y2="206" stroke="#c8d2dc"/>
+  <text x="52" y="200" font-size="10" font-weight="700" fill="#16202c">Risico | Korting | Code</text>
+  <text x="52" y="222" font-size="10" fill="#6b7a8c">EUR 100 | 3,00 | BAS-VR-100</text>
+  <text x="52" y="240" font-size="10" fill="#6b7a8c">EUR 200 | 6,50 | BAS-VR-200</text>
+  <text x="52" y="258" font-size="10" fill="#6b7a8c">EUR 400 | 14,00 | BAS-VR-400</text>
+  <text x="52" y="274" font-size="10" fill="#6b7a8c">EUR 500 | 19,00 | BAS-VR-500</text>
+
+  <text x="44" y="304" font-size="11.5" fill="#6b7a8c">## 2. Fysiotherapie</text>
+  <text x="44" y="322" font-size="11" fill="#6b7a8c">Vanaf de 21e behandeling…</text>
+  <text x="44" y="348" font-size="11.5" fill="#6b7a8c">## 3. Wijzigingen</text>
+  <text x="44" y="366" font-size="11" fill="#6b7a8c">BAS-VR-350 is vervallen.</text>
+
+  <!-- cut line through the table -->
+  <line x1="34" y1="228" x2="270" y2="228" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="262" y="224" font-size="10.5" font-weight="700" fill="#c0392b">400 chars</text>
+
+  <line x1="258" y1="200" x2="292" y2="200" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a2)"/>
+  <line x1="258" y1="330" x2="292" y2="330" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a2)"/>
+
+  <!-- Fixed-size result -->
+  <rect x="298" y="80" width="336" height="330" rx="8" fill="#fdf6f5" stroke="#eecfc9"/>
+  <text x="318" y="106" font-size="12" font-weight="700" fill="#c0392b" letter-spacing="0.6">FIXED-SIZE (400 / 50)</text>
+
+  <rect x="318" y="122" width="296" height="72" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="330" y="142" font-size="10.5" font-weight="600" fill="#16202c">chunk 0</text>
+  <text x="330" y="160" font-size="10" fill="#6b7a8c">…verplicht eigen risico bedraagt EUR 385…</text>
+  <text x="330" y="178" font-size="10" fill="#6b7a8c">Risico | Korting | Code &#160;&#160;EUR 100 | 3,00 …</text>
+
+  <rect x="318" y="206" width="296" height="86" rx="6" fill="#fdf1ef" stroke="#c0392b" stroke-width="1.6"/>
+  <text x="330" y="226" font-size="10.5" font-weight="700" fill="#c0392b">chunk 1 — header lost</text>
+  <text x="330" y="246" font-size="10.5" font-family="monospace" fill="#16202c">| EUR 400 | 14,00 | BAS-VR-400 |</text>
+  <text x="330" y="263" font-size="10.5" font-family="monospace" fill="#16202c">| EUR 500 | 19,00 | BAS-VR-500 |</text>
+  <text x="330" y="282" font-size="10" fill="#c0392b">Which column is the discount? The model guesses.</text>
+
+  <rect x="318" y="304" width="296" height="60" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="330" y="324" font-size="10.5" font-weight="600" fill="#16202c">chunk 2</text>
+  <text x="330" y="342" font-size="10" fill="#6b7a8c">…Vanaf de 21e behandeling… BAS-VR-350…</text>
+  <text x="330" y="357" font-size="10" fill="#c0392b">two sections merged, no title, no section name</text>
+
+  <text x="318" y="388" font-size="11.5" font-weight="600" fill="#c0392b">3 chunks &#183; 1 headerless table &#183; 3 without section context</text>
+
+  <!-- Structure-aware result -->
+  <rect x="654" y="80" width="322" height="330" rx="8" fill="#eef7f2" stroke="#c3e2d3"/>
+  <text x="674" y="106" font-size="12" font-weight="700" fill="#1a7f5a" letter-spacing="0.6">STRUCTURE-AWARE</text>
+
+  <rect x="674" y="122" width="282" height="88" rx="6" fill="#ffffff" stroke="#1a7f5a"/>
+  <text x="686" y="141" font-size="10" fill="#1a7f5a">[Basisverzekering 2026 | 1. Eigen risico]</text>
+  <text x="686" y="160" font-size="10" fill="#6b7a8c">Het verplicht eigen risico bedraagt EUR 385…</text>
+  <rect x="686" y="168" width="258" height="32" rx="3" fill="#f5f7f9" stroke="#c8d2dc"/>
+  <text x="694" y="182" font-size="9.5" font-weight="700" fill="#16202c">Risico | Korting | Code</text>
+  <text x="694" y="195" font-size="9.5" fill="#6b7a8c">…4 rows, header intact, never split…</text>
+
+  <rect x="674" y="222" width="282" height="60" rx="6" fill="#ffffff" stroke="#1a7f5a"/>
+  <text x="686" y="241" font-size="10" fill="#1a7f5a">[Basisverzekering 2026 | 2. Fysiotherapie]</text>
+  <text x="686" y="259" font-size="10" fill="#6b7a8c">Vanaf de 21e behandeling bij een chronische</text>
+  <text x="686" y="273" font-size="10" fill="#6b7a8c">aandoening…</text>
+
+  <rect x="674" y="294" width="282" height="60" rx="6" fill="#ffffff" stroke="#1a7f5a"/>
+  <text x="686" y="313" font-size="10" fill="#1a7f5a">[Basisverzekering 2026 | 3. Wijzigingen]</text>
+  <text x="686" y="331" font-size="10" fill="#6b7a8c">BAS-VR-400 is nieuw. BAS-VR-350 is per</text>
+  <text x="686" y="345" font-size="10" fill="#6b7a8c">1 januari 2026 vervallen.</text>
+
+  <text x="674" y="388" font-size="11.5" font-weight="600" fill="#1a7f5a">4 chunks &#183; 0 headerless tables &#183; 0 without section context</text>
+
+  <text x="24" y="446" font-size="12.5" fill="#16202c"><tspan font-weight="700">Three rules, none of them clever:</tspan> split on headings, never split a table, and prepend document title + section to every chunk</text>
+  <text x="24" y="468" font-size="12.5" fill="#16202c">so a chunk retrieved in isolation still says what it is.</text>
+  <text x="24" y="494" font-size="12" fill="#6b7a8c">The headerless-table count is the number of chunks that can produce a confident wrong answer about a product code.</text>
+</svg>

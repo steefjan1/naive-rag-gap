@@ -2,6 +2,14 @@
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+# `azd up` writes .env at the repo root via its postprovision hook. Load it if
+# present; real environment variables always win, so CI and container runs that
+# inject values directly are unaffected.
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
 
 
 def _required(name: str) -> str:

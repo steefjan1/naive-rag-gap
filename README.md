@@ -18,6 +18,50 @@ Companion to the post *The four things naive RAG diagrams leave out* on
 | 3. Retrieval without authorisation is a breach | `03_permissions/` | Group-based security trimming with an OData filter, and a leak test that fails the build. |
 | 4. "Zero hallucination" is a measurable claim | `04_groundedness/` | Citation-enforced prompting, a refusal path, and an eval set that includes unanswerable questions. |
 
+## Diagrams
+
+One per gap, in `docs/diagrams/`. Plain SVG, no external fonts or assets, sized
+1000px wide for a blog column. Each contrasts the naive pipeline with what the
+gap actually requires.
+
+| Gap | File |
+| --- | ---- |
+| 1 | `docs/diagrams/gap-1-retrieval.svg` |
+| 2 | `docs/diagrams/gap-2-chunking.svg` |
+| 3 | `docs/diagrams/gap-3-permissions.svg` |
+| 4 | `docs/diagrams/gap-4-groundedness.svg` |
+
+## Provisioning with azd
+
+One command creates everything the samples need, keyless:
+
+```bash
+azd auth login
+azd up
+```
+
+You are prompted for an environment name and a region. If a run ever fails validation with *The 'location' property must be specified*, azd did not capture the region — set it explicitly with `azd env set AZURE_LOCATION swedencentral` and re-run. That provisions an Azure
+AI Search service (Basic, semantic ranker enabled), a Microsoft Foundry account
+with `text-embedding-3-large` and `gpt-5-mini` deployed, and the role
+assignments — including the one people forget: the **search service's own
+managed identity** needs `Cognitive Services User` on the Foundry resource, or
+integrated vectorization and agentic retrieval fail at query time with an
+authorization error that reads like a config bug.
+
+A postprovision hook writes `.env` for you. Then:
+
+```bash
+python -m 01_retrieval.create_index
+python -m 01_retrieval.index_documents
+python -m 01_retrieval.compare_retrieval
+```
+
+Tear it all down with `azd down --purge`. The `--purge` matters: Foundry
+accounts soft-delete, and the name stays reserved until purged.
+
+Costs money while it exists. Basic-tier search has no free option and bills
+hourly regardless of use.
+
 ## Setup
 
 ```bash
@@ -36,17 +80,23 @@ resource it needs **Cognitive Services OpenAI User**.
 
 ```bash
 python -m 02_chunking.chunk_strategies        # no Azure needed, start here
-python -m 01_retrieval.create_index
+
+python -m 01_retrieval.create_index           # gap 1
 python -m 01_retrieval.index_documents
 python -m 01_retrieval.compare_retrieval
-python -m 03_permissions.security_trimming
-python -m 04_groundedness.evaluate
+
+python -m 03_permissions.setup_acl_index      # gap 3 - separate index, includes
+python -m 03_permissions.security_trimming    #   the restricted document
+
+python -m 04_groundedness.evaluate            # gap 4 - uses the gap 1 index
 ```
 
-`01_retrieval/agentic_retrieve.py` needs a knowledge base and the preview SDK
-(`pip install --pre azure-search-documents`). Extractive agentic retrieval is GA
-in api-version `2026-04-01`; query planning, answer synthesis, and configurable
-reasoning effort are preview-only in `2026-05-01-preview`.
+`01_retrieval/agentic_retrieve.py` additionally needs a knowledge base, which
+none of the scripts create — set one up in the portal or via REST first.
+Extractive agentic retrieval is GA in api-version `2026-04-01` and works on the
+stable SDK; query planning, answer synthesis, and configurable reasoning effort
+are preview-only in `2026-05-01-preview` and need `pip install --pre
+azure-search-documents`.
 
 ## The sample corpus
 

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8494a5"/>
+    </marker>
+    <marker id="a4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b6cb8"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="540" fill="#ffffff"/>
+
+  <text x="32" y="34" font-size="19" font-weight="700" fill="#16202c">Gap 4 — “Zero hallucination” is a claim, and claims get measured</text>
+  <text x="32" y="56" font-size="13" fill="#6b7a8c">Grounding the prompt does not guarantee a grounded answer. Three failure modes survive the diagram intact.</text>
+
+  <!-- Panel A -->
+  <rect x="24" y="76" width="952" height="152" rx="8" fill="#fdf6f5" stroke="#eecfc9"/>
+  <text x="44" y="102" font-size="12" font-weight="700" fill="#c0392b" letter-spacing="0.6">WHAT SURVIVES “AUGMENT → GENERATE”</text>
+
+  <rect x="44" y="120" width="120" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="104" y="143" font-size="12" fill="#16202c" text-anchor="middle">Chunks</text>
+  <text x="104" y="159" font-size="10.5" fill="#6b7a8c" text-anchor="middle">+ question</text>
+
+  <line x1="170" y1="146" x2="200" y2="146" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a4)"/>
+
+  <rect x="206" y="120" width="110" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="261" y="151" font-size="12" fill="#16202c" text-anchor="middle">LLM</text>
+
+  <line x1="322" y1="146" x2="352" y2="146" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a4)"/>
+
+  <rect x="358" y="120" width="150" height="52" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="433" y="143" font-size="12" fill="#16202c" text-anchor="middle">Fluent answer</text>
+  <text x="433" y="159" font-size="10.5" fill="#6b7a8c" text-anchor="middle">no way to check it</text>
+
+  <rect x="534" y="114" width="140" height="98" rx="6" fill="#fdf1ef" stroke="#c0392b"/>
+  <text x="604" y="134" font-size="11" font-weight="700" fill="#c0392b" text-anchor="middle">Parametric leak</text>
+  <text x="546" y="154" font-size="10.5" fill="#c0392b">Asked for a premium</text>
+  <text x="546" y="170" font-size="10.5" fill="#c0392b">that is in no source.</text>
+  <text x="546" y="186" font-size="10.5" fill="#c0392b">Pretraining supplies a</text>
+  <text x="546" y="202" font-size="10.5" fill="#c0392b">plausible Dutch one.</text>
+
+  <rect x="686" y="114" width="140" height="98" rx="6" fill="#fdf1ef" stroke="#c0392b"/>
+  <text x="756" y="134" font-size="11" font-weight="700" fill="#c0392b" text-anchor="middle">Blend</text>
+  <text x="698" y="154" font-size="10.5" fill="#c0392b">Two chunks fused into</text>
+  <text x="698" y="170" font-size="10.5" fill="#c0392b">a claim neither makes.</text>
+  <text x="698" y="192" font-size="10.5" fill="#c0392b">Every fact traces back.</text>
+  <text x="698" y="206" font-size="10.5" fill="#c0392b">The sentence does not.</text>
+
+  <rect x="838" y="114" width="120" height="98" rx="6" fill="#fdf1ef" stroke="#c0392b"/>
+  <text x="898" y="134" font-size="11" font-weight="700" fill="#c0392b" text-anchor="middle">No exit</text>
+  <text x="850" y="154" font-size="10.5" fill="#c0392b">Retrieval returned</text>
+  <text x="850" y="170" font-size="10.5" fill="#c0392b">nothing relevant.</text>
+  <text x="850" y="192" font-size="10.5" fill="#c0392b">Nothing told it that</text>
+  <text x="850" y="206" font-size="10.5" fill="#c0392b">“I don’t know” exists.</text>
+
+  <!-- Panel B -->
+  <rect x="24" y="246" width="952" height="188" rx="8" fill="#eef6fb" stroke="#c7e0f0"/>
+  <text x="44" y="272" font-size="12" font-weight="700" fill="#0b6cb8" letter-spacing="0.6">MEASURED INSTEAD</text>
+
+  <rect x="44" y="292" width="150" height="72" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="119" y="313" font-size="11.5" font-weight="600" fill="#16202c" text-anchor="middle">Chunks with ref_id</text>
+  <text x="119" y="332" font-size="10.5" fill="#6b7a8c" text-anchor="middle">every source gets a</text>
+  <text x="119" y="347" font-size="10.5" fill="#6b7a8c" text-anchor="middle">stable handle</text>
+
+  <line x1="200" y1="328" x2="228" y2="328" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a4b)"/>
+
+  <rect x="234" y="284" width="200" height="88" rx="6" fill="#ffffff" stroke="#0b6cb8" stroke-width="1.8"/>
+  <text x="334" y="304" font-size="11.5" font-weight="600" fill="#16202c" text-anchor="middle">Prompt with three rules</text>
+  <text x="246" y="324" font-size="10.5" fill="#0b6cb8">1. sources only, ignore priors</text>
+  <text x="246" y="341" font-size="10.5" fill="#0b6cb8">2. cite [ref_id] after each claim</text>
+  <text x="246" y="358" font-size="10.5" fill="#0b6cb8">3. else answer exactly “Ik weet het niet”</text>
+
+  <line x1="440" y1="328" x2="468" y2="328" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a4b)"/>
+
+  <rect x="474" y="292" width="140" height="72" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="544" y="313" font-size="11.5" font-weight="600" fill="#16202c" text-anchor="middle">Answer or refusal</text>
+  <text x="544" y="332" font-size="10.5" fill="#6b7a8c" text-anchor="middle">refusal is a string,</text>
+  <text x="544" y="347" font-size="10.5" fill="#6b7a8c" text-anchor="middle">so it is detectable</text>
+
+  <line x1="620" y1="328" x2="648" y2="328" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a4b)"/>
+
+  <rect x="654" y="292" width="132" height="72" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="720" y="313" font-size="11.5" font-weight="600" fill="#16202c" text-anchor="middle">Judge</text>
+  <text x="720" y="332" font-size="10.5" fill="#6b7a8c" text-anchor="middle">against the sources</text>
+  <text x="720" y="347" font-size="10.5" fill="#6b7a8c" text-anchor="middle">actually retrieved</text>
+
+  <line x1="792" y1="328" x2="820" y2="328" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a4b)"/>
+
+  <rect x="826" y="278" width="130" height="100" rx="6" fill="#eef7f2" stroke="#1a7f5a" stroke-width="1.5"/>
+  <text x="891" y="298" font-size="11" font-weight="700" fill="#1a7f5a" text-anchor="middle">Four numbers</text>
+  <text x="838" y="318" font-size="10.5" fill="#1a7f5a">groundedness</text>
+  <text x="838" y="335" font-size="10.5" fill="#1a7f5a">citation_valid</text>
+  <text x="838" y="352" font-size="10.5" fill="#1a7f5a">retrieval_hit</text>
+  <text x="838" y="369" font-size="10.5" font-weight="700" fill="#1a7f5a">refusal</text>
+
+  <rect x="44" y="386" width="742" height="34" rx="5" fill="#ffffff" stroke="#c7e0f0"/>
+  <text x="56" y="407" font-size="11.5" fill="#16202c"><tspan font-weight="700">Split the two metrics:</tspan> wrong answer + good retrieval = generation problem. Wrong answer + bad retrieval = retrieval problem.</text>
+
+  <text x="24" y="462" font-size="12.5" fill="#16202c"><tspan font-weight="700">The eval set is where teams cut corners.</tspan> Everyone writes questions the corpus answers well. Almost nobody includes the withdrawn product code,</text>
+  <text x="24" y="482" font-size="12.5" fill="#16202c">the topic that was never documented, or the answer that lives in a file this user may not open. Those are the incident reports.</text>
+  <text x="24" y="510" font-size="12" fill="#6b7a8c">A system scoring 10/10 on answerable questions and 0/4 on refusals is not grounded. It is fluent.</text>
+</svg>

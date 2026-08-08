@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8494a5"/>
+    </marker>
+    <marker id="a3r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/>
+    </marker>
+    <marker id="a3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b6cb8"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="540" fill="#ffffff"/>
+
+  <text x="32" y="34" font-size="19" font-weight="700" fill="#16202c">Gap 3 — Retrieval without authorisation is a breach with a chat interface</text>
+  <text x="32" y="56" font-size="13" fill="#6b7a8c">Probe: “Hoeveel coulance mag een behandelaar toekennen zonder tweede handtekening?”</text>
+
+  <!-- Panel A -->
+  <rect x="24" y="76" width="952" height="182" rx="8" fill="#fdf6f5" stroke="#eecfc9"/>
+  <text x="44" y="102" font-size="12" font-weight="700" fill="#c0392b" letter-spacing="0.6">ONE INDEX, NO FILTER — THE DIAGRAM’S PIPELINE</text>
+
+  <rect x="44" y="126" width="150" height="34" rx="5" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="119" y="148" font-size="11.5" fill="#16202c" text-anchor="middle">Polis basis (public)</text>
+  <rect x="44" y="168" width="150" height="34" rx="5" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="119" y="190" font-size="11.5" fill="#16202c" text-anchor="middle">Polis aanvullend (public)</text>
+  <rect x="44" y="210" width="150" height="34" rx="5" fill="#fdf1ef" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="119" y="232" font-size="11.5" font-weight="600" fill="#c0392b" text-anchor="middle">WI-CLAIM-014 (restricted)</text>
+
+  <line x1="200" y1="185" x2="234" y2="185" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a3)"/>
+
+  <rect x="240" y="158" width="130" height="54" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="305" y="182" font-size="12.5" fill="#16202c" text-anchor="middle">Single index</text>
+  <text x="305" y="198" font-size="10.5" fill="#6b7a8c" text-anchor="middle">no ACL metadata</text>
+
+  <line x1="376" y1="185" x2="410" y2="185" stroke="#8494a5" stroke-width="1.6" marker-end="url(#a3)"/>
+
+  <rect x="416" y="158" width="150" height="54" rx="6" fill="#ffffff" stroke="#c8d2dc"/>
+  <text x="491" y="182" font-size="12.5" fill="#16202c" text-anchor="middle">Semantic search</text>
+  <text x="491" y="198" font-size="10.5" fill="#6b7a8c" text-anchor="middle">relevance only</text>
+
+  <line x1="572" y1="185" x2="606" y2="185" stroke="#c0392b" stroke-width="1.6" marker-end="url(#a3r)"/>
+
+  <rect x="612" y="152" width="190" height="66" rx="6" fill="#fdf1ef" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="707" y="176" font-size="12.5" font-weight="600" fill="#c0392b" text-anchor="middle">Customer service agent</text>
+  <text x="707" y="194" font-size="11" fill="#c0392b" text-anchor="middle">receives WI-CLAIM-014</text>
+  <text x="707" y="210" font-size="10.5" fill="#c0392b" text-anchor="middle">coulance limits, verbatim</text>
+
+  <text x="822" y="170" font-size="11.5" fill="#6b7a8c">Semantic search does not</text>
+  <text x="822" y="187" font-size="11.5" fill="#6b7a8c">know your authorisation</text>
+  <text x="822" y="204" font-size="11.5" fill="#6b7a8c">model. It never did.</text>
+
+  <!-- The prompt fallacy -->
+  <rect x="24" y="272" width="952" height="52" rx="8" fill="#ffffff" stroke="#eecfc9" stroke-dasharray="4 3"/>
+  <text x="44" y="294" font-size="12" font-weight="700" fill="#c0392b" letter-spacing="0.6">NOT A CONTROL</text>
+  <text x="44" y="313" font-size="12" fill="#16202c">“System prompt: only use documents this user is allowed to see.” &#8212; the text is already in the context window. That is a suggestion, not a boundary.</text>
+
+  <!-- Panel B -->
+  <rect x="24" y="342" width="952" height="150" rx="8" fill="#eef6fb" stroke="#c7e0f0"/>
+  <text x="44" y="368" font-size="12" font-weight="700" fill="#0b6cb8" letter-spacing="0.6">TRIMMED AT THE SEARCH ENGINE, BEFORE THE MODEL SEES ANYTHING</text>
+
+  <rect x="44" y="390" width="128" height="54" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="108" y="412" font-size="12" fill="#16202c" text-anchor="middle">Validated token</text>
+  <text x="108" y="429" font-size="10.5" fill="#6b7a8c" text-anchor="middle">from your gateway</text>
+
+  <line x1="178" y1="417" x2="206" y2="417" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a3b)"/>
+
+  <rect x="212" y="390" width="128" height="54" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="276" y="412" font-size="12" fill="#16202c" text-anchor="middle">Group claims</text>
+  <text x="276" y="429" font-size="10.5" fill="#6b7a8c" text-anchor="middle">never user input</text>
+
+  <line x1="346" y1="417" x2="374" y2="417" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a3b)"/>
+
+  <rect x="380" y="386" width="270" height="62" rx="6" fill="#ffffff" stroke="#0b6cb8" stroke-width="1.8"/>
+  <text x="515" y="406" font-size="11.5" font-weight="600" fill="#16202c" text-anchor="middle">OData filter, applied server-side</text>
+  <text x="515" y="428" font-size="10" font-family="monospace" fill="#0b6cb8" text-anchor="middle">group_ids/any(g: search.in(g, '…', ','))</text>
+  <text x="515" y="442" font-size="9.5" fill="#6b7a8c" text-anchor="middle">empty claims → fail closed, not fail open</text>
+
+  <line x1="656" y1="417" x2="684" y2="417" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a3b)"/>
+
+  <rect x="690" y="390" width="126" height="54" rx="6" fill="#ffffff" stroke="#0b6cb8"/>
+  <text x="753" y="412" font-size="12" fill="#16202c" text-anchor="middle">Hybrid + rerank</text>
+  <text x="753" y="429" font-size="10.5" fill="#6b7a8c" text-anchor="middle">over the allowed set</text>
+
+  <line x1="822" y1="417" x2="850" y2="417" stroke="#0b6cb8" stroke-width="1.6" marker-end="url(#a3b)"/>
+
+  <rect x="856" y="390" width="100" height="54" rx="6" fill="#eef7f2" stroke="#1a7f5a" stroke-width="1.5"/>
+  <text x="906" y="412" font-size="12" font-weight="600" fill="#1a7f5a" text-anchor="middle">Answer</text>
+  <text x="906" y="429" font-size="10.5" fill="#1a7f5a" text-anchor="middle">or nothing</text>
+
+  <text x="24" y="516" font-size="12" fill="#16202c"><tspan font-weight="700">Sharp edge:</tspan> a knowledge source created without <tspan font-family="monospace" font-size="11">ingestionPermissionOptions</tspan> holds no permission metadata, and returns results <tspan font-weight="700">unfiltered regardless of the header</tspan>. It fails open, quietly.</text>
+  <text x="24" y="534" font-size="12" fill="#6b7a8c">Write the leak test: one query, one unauthorised caller, one assertion. Run it in CI.</text>
+</svg>
