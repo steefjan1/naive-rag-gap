@@ -1,0 +1,8 @@
+# Stable track: gaps 1 (hybrid + rerank), 2, 3, 4 all run on this.
+azure-search-documents>=11.6.0
+azure-identity>=1.19.0
+openai>=1.60.0
+
+# Gap 1's agentic_retrieve.py needs the preview package for query planning,
+# answer synthesis, and configurable reasoning effort:
+#   pip install --pre azure-search-documents

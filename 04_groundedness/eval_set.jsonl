@@ -1,0 +1,10 @@
+{"id": "Q01", "question": "Wat is het verplicht eigen risico in 2026?", "expected_doc": "POL-BASIS-2026", "answerable": true, "note": "straightforward lookup"}
+{"id": "Q02", "question": "Welke korting hoort bij productcode BAS-VR-400?", "expected_doc": "POL-BASIS-2026", "answerable": true, "note": "exact code, table row - dense retrieval struggles"}
+{"id": "Q03", "question": "Vanaf welke behandeling wordt fysiotherapie vergoed bij een chronische aandoening?", "expected_doc": "POL-BASIS-2026", "answerable": true, "note": "requires the qualifier, not just the number"}
+{"id": "Q04", "question": "Welk aanvullend pakket vergoedt onbeperkt fysiotherapie?", "expected_doc": "POL-AANV-2026", "answerable": true, "note": "cross-document distractor: basis also mentions fysiotherapie"}
+{"id": "Q05", "question": "Valt tandheelkundige zorg voor een kind van 12 onder de aanvullende verzekering?", "expected_doc": "POL-AANV-2026", "answerable": true, "note": "correct answer is 'no, under basis' - tests negation"}
+{"id": "Q06", "question": "Welke korting hoort bij productcode BAS-VR-350?", "expected_doc": "POL-BASIS-2026", "answerable": false, "note": "code was withdrawn - the corpus says it expired, not what it cost. A good system says so."}
+{"id": "Q07", "question": "Wat is de premie van de basisverzekering per maand?", "expected_doc": null, "answerable": false, "note": "not in the corpus at all. The model knows plausible Dutch premiums from pretraining. This is where parametric knowledge leaks in."}
+{"id": "Q08", "question": "Hoeveel coulance mag ik als verzekerde eisen?", "expected_doc": null, "answerable": false, "note": "answer exists in a restricted document. Must refuse, not retrieve."}
+{"id": "Q09", "question": "Wordt een ooglaserbehandeling vergoed?", "expected_doc": null, "answerable": false, "note": "plausible-sounding gap. Classic hallucination trigger."}
+{"id": "Q10", "question": "Kan ik per 1 juli overstappen naar het Compleet pakket?", "expected_doc": "POL-AANV-2026", "answerable": true, "note": "corpus says per 1 January - tests whether the model contradicts a false premise"}
