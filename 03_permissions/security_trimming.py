@@ -30,7 +30,7 @@ from azure.search.documents.indexes.models import (
     SearchFieldDataType,
     SimpleField,
 )
-from azure.search.documents.models import QueryType, VectorizableTextQuery
+from azure.search.documents.models import QueryType, VectorizedQuery
 
 from common.clients import index_client, openai_client, search_client
 from common.config import Settings
@@ -86,8 +86,11 @@ def trimming_filter(caller: Caller) -> str:
 
 def query_as(settings, caller: Caller, question: str, apply_trimming: bool = True):
     client = search_client(settings, settings.acl_index_name)
-    vector_query = VectorizableTextQuery(
-        text=question, k_nearest_neighbors=50, fields="content_vector"
+    embedded = openai_client(settings).embeddings.create(
+        model=settings.embedding_deployment, input=[question]
+    ).data[0].embedding
+    vector_query = VectorizedQuery(
+        vector=embedded, k_nearest_neighbors=50, fields="content_vector"
     )
     return list(
         client.search(

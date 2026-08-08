@@ -22,7 +22,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from azure.search.documents.models import QueryType, VectorizableTextQuery
+from azure.search.documents.models import QueryType, VectorizedQuery
 
 from common.clients import openai_client, search_client
 from common.config import Settings
@@ -47,6 +47,7 @@ Regels:
 - Gebruik uitsluitend de onderstaande bronnen. Negeer wat je zelf denkt te weten.
 - Citeer na elke bewering de gebruikte bron als [ref_id].
 - Staat het antwoord niet letterlijk in de bronnen, antwoord dan exact: {refusal}
+  Voeg in dat geval geen bronverwijzingen toe. Een weigering citeert niets.
 - Klopt de aanname in de vraag niet volgens de bronnen, corrigeer die dan expliciet.
 
 Bronnen:
@@ -92,10 +93,15 @@ def load_cases() -> list[Case]:
     return cases
 
 
-def retrieve(settings, question: str, top: int = 5) -> list[dict]:
+def retrieve(settings, oai, question: str, top: int = 5) -> list[dict]:
     client = search_client(settings)
-    vector_query = VectorizableTextQuery(
-        text=question, k_nearest_neighbors=50, fields="content_vector"
+    # Client-side embedding, same reasoning as in 01_retrieval/compare_retrieval.py:
+    # do not let an evaluation depend on server-side vectorization.
+    embedded = oai.embeddings.create(
+        model=settings.embedding_deployment, input=[question]
+    ).data[0].embedding
+    vector_query = VectorizedQuery(
+        vector=embedded, k_nearest_neighbors=50, fields="content_vector"
     )
     results = client.search(
         search_text=question,
@@ -156,13 +162,19 @@ def main() -> None:
     refusal_cases = 0
 
     for case in cases:
-        sources = retrieve(settings, case.question)
+        sources = retrieve(settings, oai, case.question)
         text = answer(oai, settings, case.question, sources)
         refused = REFUSAL.lower() in text.lower()
 
         valid_ids = {s["ref_id"] for s in sources}
         citations = cited_ids(text)
-        citation_valid = refused or (bool(citations) and citations <= valid_ids)
+        if refused:
+            # A refusal that cites sources is still a defect: it implies the
+            # sources were consulted and found wanting on a specific point,
+            # which is not what happened.
+            citation_valid = not citations
+        else:
+            citation_valid = bool(citations) and citations <= valid_ids
 
         retrieved_docs = {s["doc_id"] for s in sources}
         retrieval_hit = case.expected_doc is None or case.expected_doc in retrieved_docs
@@ -190,9 +202,11 @@ def main() -> None:
     print(f"  citation_valid  {totals['citation_valid']}/{n}")
     print(f"  retrieval_hit   {totals['retrieval_hit']}/{n}")
     print(f"  refusal         {totals['refusal']}/{refusal_cases} (unanswerable only)")
+    answerable = n - refusal_cases
     print(
-        "\nThe refusal number is the one to watch. A system that scores 10/10 on "
-        "answerable questions and 0/4 on refusals is not grounded - it is fluent."
+        f"\nThe refusal number is the one to watch. A system that scores "
+        f"{answerable}/{answerable} on answerable questions and 0/{refusal_cases} "
+        "on refusals is not grounded - it is fluent."
     )
 
 

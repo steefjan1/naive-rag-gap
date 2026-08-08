@@ -144,6 +144,12 @@ resource searchIdentityOnFoundry 'Microsoft.Authorization/roleAssignments@2022-0
 }
 
 output searchEndpoint string = 'https://${search.name}.search.windows.net'
-output openAiEndpoint string = foundry.properties.endpoint
+// The AIServices account exposes two hostnames. The OpenAI SDK is happy with
+// either, but the Azure AI Search vectorizer calls the endpoint server-side and
+// wants the *.openai.azure.com form - the cognitiveservices.azure.com form
+// produces an intermittent 404 from the vectorization action. customSubDomainName
+// is set on the account, so both hostnames resolve to the same resource.
+output openAiEndpoint string = 'https://${foundry.name}.openai.azure.com/'
+output openAiEndpointAiServices string = foundry.properties.endpoint
 output searchName string = search.name
 output foundryName string = foundry.name

@@ -13,7 +13,7 @@ Companion to the post *The four things naive RAG diagrams leave out* on
 
 | Gap | Sample | What it demonstrates |
 | --- | ------ | -------------------- |
-| 1. Retrieval is not vector search | `01_retrieval/` | Vector-only vs hybrid vs hybrid + semantic reranker, scored. Plus agentic retrieval for compound questions. |
+| 1. Retrieval is not vector search | `01_retrieval/` | Vector-only vs hybrid vs hybrid + semantic reranker, scored on 11 questions. Measured 7/11, 6/11, 11/11 — hybrid alone scored *below* vector-only. Plus agentic retrieval for compound questions. |
 | 2. Chunking is most of the work | `02_chunking/` | Three chunkers against the same document; counts how many chunks lost their table header. Runs offline. |
 | 3. Retrieval without authorisation is a breach | `03_permissions/` | Group-based security trimming with an OData filter, and a leak test that fails the build. |
 | 4. "Zero hallucination" is a measurable claim | `04_groundedness/` | Citation-enforced prompting, a refusal path, and an eval set that includes unanswerable questions. |
@@ -54,6 +54,17 @@ A postprovision hook writes `.env` for you. Then:
 python -m 01_retrieval.create_index
 python -m 01_retrieval.index_documents
 python -m 01_retrieval.compare_retrieval
+```
+
+If `compare_retrieval` fails with *Could not complete vectorization action /
+404*, `AZURE_OPENAI_ENDPOINT` is on the `cognitiveservices.azure.com` hostname.
+The OpenAI SDK accepts it, but the search service's server-side vectorizer call
+does not, and the failure is intermittent rather than immediate. Switch to the
+`openai.azure.com` form of the same resource and re-run `create_index` so the
+stored vectorizer definition is updated:
+
+```
+AZURE_OPENAI_ENDPOINT="https://<your-foundry-name>.openai.azure.com/"
 ```
 
 Tear it all down with `azd down --purge`. The `--purge` matters: Foundry
@@ -100,11 +111,18 @@ azure-search-documents`.
 
 ## The sample corpus
 
-Three short synthetic Dutch policy documents in `data/policies/`. They are
-deliberately awkward in the ways real corpora are awkward: product codes that
-only exact match will find, a table whose meaning dies if you split it, a code
-that was withdrawn but still appears in the text, and one document nobody
-outside a single role may see.
+Eight short synthetic Dutch policy documents in `data/policies/`, deliberately
+awkward in the ways real corpora are awkward.
+
+The awkwardness is the design. Three documents carry structurally identical
+"Eigen risico" tables with different code families and different prices. Two
+years of the same policy sit side by side with near-identical prose and opposite
+answers. Four sections discuss fysiotherapie, one of which says it is *not*
+covered. A withdrawn product code appears by name with no price attached. And
+one document nobody outside a single role may see.
+
+A corpus with nothing to confuse cannot demonstrate confusion, which is why the
+first version of this repo understated the retrieval gap.
 
 No real policy data. No real people. Nothing here is a product of any insurer.
 
