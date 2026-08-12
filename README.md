@@ -6,7 +6,7 @@ The familiar four-box picture — index, retrieve, augment, generate — is a fi
 first explanation and a poor design. These samples show what breaks and what to
 do instead, on Azure AI Search and Microsoft Foundry.
 
-Companion to [*The Four Things Naive RAG Diagrams Leave Out*](https://sjwiggers.com)
+Companion to [*The Four Things Naive RAG Diagrams Leave Out*](https://sjwiggers.com/2026/08/12/naive-rag-diagrams-leave-out/)
 on Cloud Perspectives.
 
 ## The gaps
